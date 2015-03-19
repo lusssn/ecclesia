@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "test": "DEBUG=socket.io* supervisor -e 'node|css|js|html' -x node app.js",
+    "test": "supervisor app.js",
     "start": "node app.js"
   },
   "dependencies": {
