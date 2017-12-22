@@ -1,0 +1,48 @@
+@charset "UTF-8";
+@import "_variables";
+
+@mixin font ($font-size: 14px, $color: $text-color, $line-height: auto) {
+	@if type_of($font-size) == "color" {
+		font-size: 14px;
+		color: $font-size;
+		@if type_of($color) != "number" {
+			@warn "第二个参数`#{$color}`不是数字";
+		} @else {
+			line-height: $color;
+		}
+	} @else if type_of($font-size) == "number" {
+		font-size: $font-size;
+		color: $color;
+		@if type_of($line-height) == "number" {
+			line-height: $line-height;
+		}
+	} @else {
+		@error "参数错误";
+	}
+}
+
+// 创建一个块级格式化上下文
+// @param $position: absolute，fixed
+// @param $zIndex: 层级，默认无
+@mixin bfc($position: absolute, $top: null, $right: "", $bottom: "", $left: "") {
+	position: $position;
+	@if type_of($top) == "null" {
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	} @else {
+		@if type_of($top) == "number" {
+			top: $top;
+		}
+		@if type_of($right) == "number" {
+			right: $right;
+		}
+		@if type_of($bottom) == "number" {
+			bottom: $bottom;
+		}
+		@if type_of($left) == "number" {
+			left: $left;
+		}
+	}
+}

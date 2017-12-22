@@ -1,48 +1,43 @@
 'use strict'
 
-const fs = require('fs')
 const gulp = require('gulp')
 const browserify = require('browserify')
 const filter = require('gulp-filter')
 const rename = require('gulp-rename')
 const concat = require('gulp-concat')
+const sass = require('gulp-sass')
 const source = require('vinyl-source-stream')
-const postcss = require('gulp-postcss')
-const streamQueue = require('streamqueue')
 const babelify = require('babelify')
 
-const destFolder = 'static'
+const destFolder = 'dist'
 
 gulp.task('rtc', function() {
-  return browserify(`./src/rtc/simplewebrtc.js`)
+  return browserify(`./static/rtc/simplewebrtc.js`)
   .bundle({standalone: 'SimpleWebRTC'})
   .pipe(source('rtc.js'))
   .pipe(gulp.dest(`${destFolder}/js`))
 })
 
 gulp.task('js', function() {
-  browserify('./src/js/prepare.js')
+  browserify('./static/views/prepare.js')
     .transform(babelify)
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(gulp.dest(`${destFolder}/js`))
 
-  browserify('./src/js/chat.js')
+  browserify('./static/views/chat/chat.js')
     .transform(babelify)
     .bundle()
     .pipe(source('chat.js'))
     .pipe(gulp.dest(`${destFolder}/js`))
 })
 
-gulp.task('css', function() {
+gulp.task('sass', function() {
   gulp.src([
     './node_modules/bootstrap/dist/css/bootstrap.css',
-    'src/css/*.css',
+    'static/**/*.scss',
   ])
-  .pipe(postcss([
-    require('autoprefixer'),
-    require('postcss-nested'),
-  ]))
+  .pipe(sass())
   .pipe(concat('style.css'))
   .pipe(gulp.dest(`${destFolder}/css/`))
 })
@@ -58,20 +53,23 @@ gulp.task('static', function() {
   .pipe(rename({dirname: ''}))
   .pipe(gulp.dest(`${destFolder}/fonts`))
 
-  // favicon
-  gulp.src('./src/favicon.ico')
-  .pipe(gulp.dest(destFolder))
-
   // images
-  gulp.src('./src/img/*')
-  .pipe(gulp.dest(`${destFolder}/img`))
+  gulp.src('./static/images/*')
+  .pipe(gulp.dest(`${destFolder}/images`))
+})
+
+gulp.task('views', function() {
+  gulp.src([
+    'static/views/**/*.html'
+  ])
+    .pipe(gulp.dest('views'))
 })
 
 gulp.task('watch', function() {
   gulp.start('base')
-  gulp.watch('./src/**/*', ['base'])
+  gulp.watch('./static/**/*', ['base'])
 })
 
-gulp.task('base', ['css', 'js', 'static'])
-gulp.task('build', ['rtc', 'css', 'js', 'static'])
+gulp.task('base', ['sass', 'js', 'static', 'views'])
+gulp.task('build', ['rtc', 'sass', 'js', 'static'])
 gulp.task('default', ['watch'])

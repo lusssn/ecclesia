@@ -1,0 +1,61 @@
+{% extends '_layout/base.html' %}
+{% block title %} Ecclesia Home {% endblock title %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block content %}
+<div class="page home-page">
+  <div class="main">
+    <div class="center-block">
+      <h1 class="huge-title">Hi, {{ user.account }}</h1>
+      <div class="home-oper">
+        <div class="home-oper-item">
+          <a href="#create" role="tab" data-toggle="tab" aria-controls="create" aria-expanded="true">
+            <i class="fa fa-bar-chart fa-5x"></i>
+            <div class="home-oper-title">Create a meeting</div>
+          </a>
+        </div>
+        <div class="home-oper-item">
+          <a href="#join" role="tab" data-toggle="tab" aria-controls="join" aria-expanded="false">
+            <i class="fa fa-users fa-5x"></i>
+            <div class="home-oper-title">Join a meeting</div>
+          </a>
+        </div>
+        <div class="home-oper-item">
+          <a href="/history">
+            <i class="fa fa-folder-open-o fa-5x"></i>
+            <div class="home-oper-title">View history</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="tab-content">
+        <form id="create" action="/create" method="post" class="type-form ecc-form center-block tab-pane active">
+          <div class="form-group">
+            <input name="room" type="text" class="form-control" placeholder="Room name">
+          </div>
+          <div class="text-center form-group">
+            <button class="btn btn-success" type="submit">Create Room</button>
+          </div>
+        </form>
+
+        <form id="join" action="/join" method="post" class="type-form ecc-form center-block tab-pane">
+          <div class="form-group">
+            <input name="room" type="text" class="form-control" placeholder="Meeting name">
+          </div>
+          <div class="form-group">
+            <input name="host" type="text" class="form-control" placeholder="Meeting Host">
+          </div>
+          <div class="text-center form-group">
+            <button class="btn btn-default" type="submit">Join Room</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock content %}

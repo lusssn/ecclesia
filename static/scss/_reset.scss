@@ -1,0 +1,73 @@
+@import "_variables";
+
+html {
+	min-width: 1280px;
+	height: 100%;
+}
+body {
+	min-height: 100%;
+	margin: 0;
+	font-family: $root-fm;
+}
+ul {
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style: none;
+}
+input {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	resize: none;
+	-webkit-user-select: text; /*webkit的浏览器，不可选中文本*/
+	-moz-user-select: text; /*firefox的浏览器，不可选中文本*/
+	-ms-user-select: text; /*ie浏览器，不可选中文本*/
+	user-select: text;
+	color: $text-color;
+	border: none;
+	border-radius: 0;
+	outline: none;
+	background-color: transparent;
+	-webkit-appearance: none;
+	&:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 1000px #FFFFFF inset;
+	}
+	/*去掉safari浏览器添加icon*/
+	&::-webkit-contacts-auto-fill-button {
+		position: absolute;
+		right: 0;
+		visibility: hidden;
+	}
+}
+select {
+	border: none;
+	outline: none;
+	background-color: transparent;
+	-webkit-appearance: none;
+}
+button {
+	border: none;
+	&:focus {
+		outline: none;
+	}
+}
+input {
+	margin: 0;
+	padding: 0;
+}
+a, a:link, a:hover, a:visited, a:focus {
+	cursor: pointer;
+	text-decoration: none;
+	outline: none;
+}
+// 覆盖bootstrap样式
+.btn-primary {
+	border: none;
+	border-radius: 0;
+	background-color: $orange;
+	&:hover {
+		background-color: rgba($orange, .7);
+	}
+}

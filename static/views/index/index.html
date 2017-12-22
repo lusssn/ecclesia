@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <title>Ecclesia</title>
+  <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- body content -->
+<div class="index">
+  <div class="index-form">
+    <div class="index-form-inner">
+      <div class="index-caption">
+        <button class="index-caption-btn active" data-id="login">Sign In</button>
+        <span class="or">or</span>
+        <button class="index-caption-btn" data-id="signup">Sign Up</button>
+      </div>
+      <form id="login" action="/login" method="post" class="ecc-form active" role="tabpanel">
+        <div class="login-item" >
+          <input class="login-input" type="text" id="usrInput" name="account"/>
+          <label class="login-label empty" for="usrInput">Username</label>
+          <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+            <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+          </svg>
+        </div>
+        <div class="login-item" >
+          <input class="login-input" type="password" id="pwdInput" name="password"/>
+          <label class="login-label empty" for="pwdInput">Password</label>
+          <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+            <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+          </svg>
+        </div>
+        <p class="ecc-form-desc">
+          Login with your registered account.<br>If you meet any questions? Please let us know : )
+        </p>
+        <button type="submit" class="btn btn-primary index-submit">Enter</button>
+      </form>
+
+      <form id="signup" action="/signup" method="post" class="tab-pane ecc-form" role="tabpanel">
+        <div class="login-item" >
+          <input class="login-input" type="text" id="emailInput" name="email"/>
+          <label class="login-label empty" for="emailInput">Email</label>
+          <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+            <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+          </svg>
+        </div>
+        <div class="login-item" >
+          <input class="login-input" type="text" id="usrInput" name="account"/>
+          <label class="login-label empty" for="usrInput">Username</label>
+          <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+            <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+          </svg>
+        </div>
+        <div class="login-item" >
+          <input class="login-input" type="password" id="pwdInput" name="password"/>
+          <label class="login-label empty" for="pwdInput">Password</label>
+          <svg class="graphic" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+            <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+          </svg>
+        </div>
+        <p class="ecc-form-desc">
+          Use letters, umerals and characters as your username or password
+        </p>
+        <button type="submit" class="btn btn-primary index-submit">Sign Up</button>
+      </form>
+    </div>
+  </div>
+  <div class="index-intro">
+    <div class="index-intro-subtitle">
+      Simulating a real-time meeting on web. <br>Enjoy the convenience brought by Ecclesia!
+    </div>
+    <div class="index-copyright">Ecclesia Organization © 2014</div>
+  </div>
+</div>
+<!-- after scripts  -->
+<script src="/js/bundle.js"></script>
+{% block script %}
+<script type="text/javascript">
+  $('.index-form-inner').on('blur', '.login-input', function () {
+    const $tar = $(this)
+    const $label = $tar.siblings('.login-label')
+    if (!$tar.val()) {
+      $label.addClass('empty')
+    } else {
+      $label.removeClass('empty')
+    }
+  }).on('click', '.index-caption-btn', function () {
+    const $tar = $(this)
+    $tar.addClass('active').siblings('.index-caption-btn').removeClass('active')
+    $('#' + $tar.data('id')).addClass('active').siblings('.ecc-form').removeClass('active')
+  })
+</script>
+{% endblock script %}
+</body>
+</html>

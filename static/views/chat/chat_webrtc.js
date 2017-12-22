@@ -1,6 +1,6 @@
 'use strict'
 
-const utils = require('./utils')
+const Util = require('../../utils/util')
 
 var RtcController = {
   host: null,
@@ -11,7 +11,7 @@ var RtcController = {
 
 
 RtcController.enableWebRTC = function() {
-  var res = utils.parseQuery(location.search.split('?')[1])
+  var res = Util.parseQuery(location.search.split('?')[1])
   var host = this.host = res['host']
   var room = this.room = res['room']
   var self = this.self = res['self']

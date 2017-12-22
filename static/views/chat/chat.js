@@ -1,7 +1,7 @@
 'use strict'
 
 const marked = require('marked')
-const utils = require('./utils')
+const Util = require('../../utils/util')
 const MediaTool = require('./media-tool')
 const RtcController = require('./chat_webrtc')
 
@@ -32,7 +32,7 @@ var Impress = {
       this.append(idx, item)
     });
 
-    var query = utils.parseQuery()
+    var query = Util.parseQuery()
     this.room = query.room
     this.host = query.host
     this.self = query.self
